@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T16:13:46.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "DIEARD\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T16:12:20.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "DIEARD\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "DIEARD\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-07T16:04:55.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "DIEARD\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T15:56:51.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Program.cs",
+              "RelativeDocumentMoniker": "DIEARD\\Program.cs",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Program.cs",
+              "RelativeToolTip": "DIEARD\\Program.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T15:53:01.724Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
