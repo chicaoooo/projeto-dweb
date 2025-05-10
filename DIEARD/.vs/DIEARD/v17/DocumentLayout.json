@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -34,11 +42,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeToolTip": "DIEARD\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAACQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-10T13:57:23.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeToolTip": "DIEARD\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB8AAACTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-10T13:20:44.394Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "ScaffoldingReadMe.txt",
               "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\ScaffoldingReadMe.txt",
               "RelativeDocumentMoniker": "DIEARD\\ScaffoldingReadMe.txt",
@@ -51,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "_LoginPartial.cshtml",
               "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
               "RelativeDocumentMoniker": "DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
@@ -59,24 +93,24 @@
               "RelativeToolTip": "DIEARD\\Views\\Shared\\_LoginPartial.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-07T16:13:46.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-07T16:13:46.324Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "DIEARD\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "DIEARD\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-07T16:12:20.245Z"
+              "WhenOpened": "2025-05-07T16:12:20.245Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "DIEARD\\wwwroot\\css\\site.css",
@@ -94,13 +128,14 @@
               "RelativeDocumentMoniker": "DIEARD\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "DIEARD\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACUAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAEQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-07T15:56:51.803Z"
+              "WhenOpened": "2025-05-07T15:56:51.803Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Program.cs",
               "RelativeDocumentMoniker": "DIEARD\\Program.cs",

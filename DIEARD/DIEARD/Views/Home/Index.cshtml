@@ -1,7 +1,29 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+
+@{
     ViewData["Title"] = "Página principal";
+    var email = User.Identity.IsAuthenticated
+        ? User.FindFirst(ClaimTypes.Email)?.Value
+        : null;
 }
 
 <div class="text-center">
-    
+    <p>
+        DIEARD - Diário interativo para escrever e acompanhar a
+        rotina pessoal.
+    </p>
+
+    @if (!string.IsNullOrEmpty(email))
+    {
+        <p>Bem-vindo, @email!</p>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+
+    }
+
 </div>
