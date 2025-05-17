@@ -8,22 +8,69 @@
         : null;
 }
 
-<div class="text-center">
-    <p>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container mt-4">
+
+
+        <div class="d-flex justify-content-center mb-5">
+            <form action="/search" method="get" class="d-flex align-items-center w-75">
+                <input type="text" name="query" class="form-control form-control-sm rounded-pill px-3 me-2" placeholder="Procurar..." style="height: 32px;" />
+
+                <button type="submit" class="btn btn-sm btn-outline-secondary rounded-pill" style="height: 32px; line-height: 1;">
+                    Procurar
+                </button>
+            </form>
+        </div>
+
+        
+        <div class="d-flex align-items-start mb-4">
+            
+            <div class="me-4">
+                <a href="/Diario/Criar" class="btn btn-outline-dark mb-2 w-100">
+                    <i class="bi bi-plus-lg"></i> Criar Diário
+                </a>
+                <a href="/Diario/Visualizar" class="btn btn-outline-dark w-100">
+                    <i class="bi bi-journal-text"></i> Visualizar Diários
+                </a>
+            </div>
+
+            
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <div class="d-flex align-items-center">
+                        
+                        <div style="width: 120px; height: 120px; background-color: #e0e0e0;" class="me-3 rounded"></div>
+                        <div>
+                            <h3 class="mb-0">Nome do perfil</h3>
+                            <p class="text-muted">@email</p>
+                        </div>
+                    </div>
+                    <div class="ms-4">
+                        <a href="/Perfil/Editar" class="btn btn-outline-secondary">
+                            <i class="bi bi-pencil"></i> Editar Perfil
+                        </a>
+                    </div>
+                </div>
+
+                
+                <div style="min-height: 300px; border: 1px solid #ccc; border-radius: 10px; padding: 20px;">
+                    <!-- Conteúdo(diários e conteúdo das pesquisas)-->
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="text-end">
+            <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </div>
+} else
+{
+    <h1>
         DIEARD - Diário interativo para escrever e acompanhar a
         rotina pessoal.
-    </p>
-
-    @if (!string.IsNullOrEmpty(email))
-    {
-        <p>Bem-vindo, @email!</p>
-    }
-    @if (User.Identity.IsAuthenticated)
-    {
-        <form asp-area="Identity" asp-page="/Account/Logout" method="post">
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
-
-    }
-
-</div>
+    </h1>
+}
