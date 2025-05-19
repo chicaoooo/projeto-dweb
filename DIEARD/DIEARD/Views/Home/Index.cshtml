@@ -1,11 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> UserManager
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+
+
 
 @{
     ViewData["Title"] = "Página principal";
-    var email = User.Identity.IsAuthenticated
-        ? User.FindFirst(ClaimTypes.Email)?.Value
-        : null;
+    IdentityUser user = await UserManager.GetUserAsync(User);
+    var email = user?.Email;
+
+
 }
 
 @if (User.Identity.IsAuthenticated)
@@ -42,8 +49,8 @@
                         
                         <div style="width: 120px; height: 120px; background-color: #e0e0e0;" class="me-3 rounded"></div>
                         <div>
-                            <h3 class="mb-0">Nome do perfil</h3>
-                            <p class="text-muted">@email</p>
+                            <h3 class="mb-0">@user</h3>
+                            <p class="text-muted">@(await UserManager.GetEmailAsync(user))</p>
                         </div>
                     </div>
                     <div class="ms-4">
