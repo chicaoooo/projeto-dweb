@@ -5,7 +5,9 @@
 }
 
 <h1>Meus Diários</h1>
-
+<p>
+    <a asp-controller="Diario" asp-action="Criar" class="btn btn-primary">Criar Novo Diário</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -30,7 +32,7 @@
                 </td>
                 <td>
                     <a asp-action="Visualizar" asp-route-id="@item.Id">Ver Detalhes</a>
-                    @* Adicione outros links como Editar, Apagar se necessário *@
+                    
                 </td>
             </tr>
         }

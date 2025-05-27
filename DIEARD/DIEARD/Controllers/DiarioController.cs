@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,19 +48,37 @@ public class DiarioController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Criar([Bind("Titulo", "Conteudo")] Diario diario)
     {
+        _logger.LogInformation("A tentar criar um novo diário.");
+        // Remover erros de validação para User e UserId, pois serão definidos no servidor
+        ModelState.Remove("User");
+        ModelState.Remove("UserId");
+
         if (ModelState.IsValid)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
+                _logger.LogWarning("Utilizador não encontrado ao criar o diário.");
                 return NotFound();
             }
             diario.UserId = user.Id;
-            diario.DataCriacao = System.DateTime.Now;
+            diario.DataCriacao = DateTime.Now;
             _context.Add(diario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _logger.LogInformation("Diário adicionado ao contexto. A chamar SaveChangesAsync.");
+            try
+            {
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("Diário guardado com sucesso.");
+                return RedirectToAction(nameof(VisualizarLista));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Erro ao guardar o diário: {ex.Message}");
+                ModelState.AddModelError("", "Ocorreu um erro ao guardar o diário.");
+                return View(diario);
+            }
         }
+        _logger.LogWarning($"ModelState inválido ao criar o diário. Erros: {string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))}");
         return View(diario);
     }
 
@@ -153,7 +172,7 @@ public class DiarioController : Controller
             try
             {
                 diario.UserId = user.Id; // Garante que o UserId seja o do utilizador logado
-                diario.DataCriacao = System.DateTime.Now;
+                diario.DataCriacao = DateTime.Now;
                 _context.Update(diario);
                 _logger.LogInformation("Chamando SaveChangesAsync.");
                 await _context.SaveChangesAsync();
@@ -185,31 +204,7 @@ public class DiarioController : Controller
         return View(diario); // Se o ModelState não for válido, retorna a view com erros
     }
 
-    [HttpGet("Apagar/{id:int}")]
-    public async Task<IActionResult> Apagar(int? id)
-    {
-        if (id == null || _context.Diarios == null)
-        {
-            return NotFound();
-        }
-        var diario = await _context.Diarios
-            .FirstOrDefaultAsync(m => m.Id == id);
-        if (diario == null)
-        {
-            return NotFound();
-        }
-
-        var user = await _userManager.GetUserAsync(User);
-        if (user == null || diario.UserId != user.Id)
-        {
-            return Forbid(); // Ou NotFound()
-        }
-
-        return View(diario);
-    }
-
     [HttpPost("Apagar/{id:int}")]
-    [ActionName("Apagar")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ApagarConfirmado(int id)
     {
@@ -235,7 +230,7 @@ public class DiarioController : Controller
             _context.Diarios.Remove(diario);
         }
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(VisualizarLista));
     }
 
     private bool DiarioExists(int id)
