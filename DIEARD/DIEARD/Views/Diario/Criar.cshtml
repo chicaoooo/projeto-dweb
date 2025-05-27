@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Criar Novo Diário";
+}
+
+<div class="main-content">
+    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="Titulo" class="form-label">Título:</label>
+            <input type="text" id="Titulo" name="Titulo" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Conteudo" class="form-label">Conteúdo:</label>
+            <textarea id="Conteudo" name="Conteudo" class="form-control" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="w-100 btn btn-primary btn-lg mt-2">
+            Guardar
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
