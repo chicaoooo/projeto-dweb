@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DIEARD.Models.Diario>
+
+@{
+    ViewData["Title"] = "Meus Diários";
+}
+
+<h1>Meus Diários</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCriacao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataCriacao)
+                </td>
+                <td>
+                    <a asp-action="Visualizar" asp-route-id="@item.Id">Ver Detalhes</a>
+                    @* Adicione outros links como Editar, Apagar se necessário *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
