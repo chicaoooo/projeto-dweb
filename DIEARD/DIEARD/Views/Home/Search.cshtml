@@ -1,0 +1,39 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
+
+@{
+    ViewData["Title"] = "Resultados da Pesquisa";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome de Utilizador</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a asp-action="UserDiaries" asp-route-userId="@user.Id" class="btn btn-sm btn-primary">Ver Diários</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhum utilizador encontrado para a sua pesquisa.</p>
+}
+
+<br />
+<a asp-action="Index">Voltar à Página Inicial</a>

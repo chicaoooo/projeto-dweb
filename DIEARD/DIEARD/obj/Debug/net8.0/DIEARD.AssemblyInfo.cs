@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DIEARD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ccc0de51aa8c7bfd7f1633c9fb52f14ccf106c77")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e758e8fa9a3c926145c680d4964be45a902d362")]
 [assembly: System.Reflection.AssemblyProductAttribute("DIEARD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DIEARD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

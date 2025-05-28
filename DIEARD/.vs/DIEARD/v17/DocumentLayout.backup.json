@@ -3,35 +3,34 @@
   "WorkspaceRootPath": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\diario\\visualizardetalhe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\diario\\visualizardetalhe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\models\\diario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\models\\diario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\diario\\visualizar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\diario\\visualizar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\profile\\editar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\profile\\editar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\diario\\editar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\diario\\editar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\home\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\home\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\controllers\\diariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\controllers\\diariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\views\\home\\userdiaries.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\views\\home\\userdiaries.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_DIEARD_a6fda923_8fca_45e5_a02d_12a90ca60b53/True/SqlTable/dbo.Diarios.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\models\\diario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\models\\diario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_DIEARD_a6fda923_8fca_45e5_a02d_12a90ca60b53/True/SqlTable/dbo.AspNetUsers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_DIEARD_a6fda923_8fca_45e5_a02d_12a90ca60b53/True/SqlTable/dbo.Diarios.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\franc\\desktop\\projeto-dweb\\dieard\\dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -97,84 +96,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "VisualizarDetalhe.cshtml",
-              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\VisualizarDetalhe.cshtml",
-              "RelativeDocumentMoniker": "DIEARD\\Views\\Diario\\VisualizarDetalhe.cshtml",
-              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\VisualizarDetalhe.cshtml",
-              "RelativeToolTip": "DIEARD\\Views\\Diario\\VisualizarDetalhe.cshtml",
-              "ViewState": "AgIAABkAAAAAAAAAAAAkwCgAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-27T10:47:59.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DiarioController.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\DiarioController.cs",
-              "RelativeDocumentMoniker": "DIEARD\\Controllers\\DiarioController.cs",
-              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\DiarioController.cs",
-              "RelativeToolTip": "DIEARD\\Controllers\\DiarioController.cs",
-              "ViewState": "AgIAAN0AAAAAAAAAAAAgwO8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T08:22:55.439Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Visualizar.cshtml",
-              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\Visualizar.cshtml",
-              "RelativeDocumentMoniker": "DIEARD\\Views\\Diario\\Visualizar.cshtml",
-              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\Visualizar.cshtml",
-              "RelativeToolTip": "DIEARD\\Views\\Diario\\Visualizar.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-27T10:26:17.867Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Editar.cshtml",
-              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\Editar.cshtml",
-              "RelativeDocumentMoniker": "DIEARD\\Views\\Diario\\Editar.cshtml",
-              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\Editar.cshtml",
-              "RelativeToolTip": "DIEARD\\Views\\Diario\\Editar.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAwCcAAAABAAAAAAAAAA==",
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Search.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Views\\Home\\Search.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Search.cshtml",
+              "RelativeToolTip": "DIEARD\\Views\\Home\\Search.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-27T11:07:35.159Z",
+              "WhenOpened": "2025-05-28T09:53:48.686Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "DIEARD\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "DIEARD\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-07T16:12:20.245Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Diario.cs",
-              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Models\\Diario.cs",
-              "RelativeDocumentMoniker": "DIEARD\\Models\\Diario.cs",
-              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Models\\Diario.cs",
-              "RelativeToolTip": "DIEARD\\Models\\Diario.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAxwB0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T09:14:12.109Z"
             },
             {
               "$type": "Document",
@@ -190,25 +125,87 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
+              "Title": "UserDiaries.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\UserDiaries.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Views\\Home\\UserDiaries.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Home\\UserDiaries.cshtml",
+              "RelativeToolTip": "DIEARD\\Views\\Home\\UserDiaries.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-28T10:02:39.061Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "DIEARD\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\HomeController.cs",
               "RelativeToolTip": "DIEARD\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAqwE4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T10:34:00.508Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Editar.cshtml",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Profile\\Editar.cshtml",
+              "RelativeDocumentMoniker": "DIEARD\\Views\\Profile\\Editar.cshtml",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Profile\\Editar.cshtml",
+              "RelativeToolTip": "DIEARD\\Views\\Profile\\Editar.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABwAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-28T09:47:55.91Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Diario.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Models\\Diario.cs",
+              "RelativeDocumentMoniker": "DIEARD\\Models\\Diario.cs",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Models\\Diario.cs",
+              "RelativeToolTip": "DIEARD\\Models\\Diario.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T09:14:12.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "DIEARD\\Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\ProfileController.cs",
+              "RelativeToolTip": "DIEARD\\Controllers\\ProfileController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAwwD4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T09:48:20.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "dbo.AspNetUsers [Dados]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_DIEARD_a6fda923_8fca_45e5_a02d_12a90ca60b53/True/SqlTable/dbo.AspNetUsers.sql",
+              "ToolTip": "dbo.AspNetUsers [Dados]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-05-28T09:46:30.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "dbo.Diarios [Dados]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/aspnet_DIEARD_a6fda923_8fca_45e5_a02d_12a90ca60b53/True/SqlTable/dbo.Diarios.sql",
               "ToolTip": "dbo.Diarios [Dados]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-05-27T13:58:22.703Z",
+              "WhenOpened": "2025-05-28T09:46:20.07Z",
               "EditorCaption": ""
             },
             {

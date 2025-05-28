@@ -1,0 +1,35 @@
+﻿@model List<DIEARD.Models.Diario>
+@{
+    ViewData["Title"] = "Diários de " + ViewBag.UserName;
+}
+
+<h1>Diários de @ViewBag.UserName</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Data de Criação</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var diario in Model)
+            {
+                <tr>
+                    <td>@diario.Titulo</td>
+                    <td>@diario.Conteudo</td>
+                    <td>@diario.DataCriacao</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Este utilizador não tem diários.</p>
+}
+
+<br />
+<a asp-action="Search" asp-route-query="@ViewBag.CurrentSearchTerm">Voltar à Pesquisa</a>
