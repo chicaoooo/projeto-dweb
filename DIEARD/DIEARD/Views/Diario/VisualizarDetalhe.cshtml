@@ -4,38 +4,101 @@
     ViewData["Title"] = "Detalhes do Diário";
 }
 
-<h1>Detalhes do Diário</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">@Model.Titulo</h3>
+                    <span class="badge bg-light text-dark">@Model.Categoria.Nome</span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar-alt"></i>
+                            Criado em @Model.DataCriacao.ToString("dd 'de' MMMM 'de' yyyy 'às' HH:mm", new System.Globalization.CultureInfo("pt-PT"))
+                        </small>
+                    </div>
 
-<div>
-    <h4>Diario</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Titulo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Titulo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Conteudo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Conteudo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DataCriacao)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DataCriacao)
-        </dd>
-    </dl>
-</div>
-<div>
-    <div>
-        <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">Editar</a> |
-        <form asp-action="ApagarConfirmado" asp-route-id="@Model.Id" method="post" class="d-inline">
-            <button type="submit" class="btn btn-danger btn-sm">Apagar</button>
-        </form> |
-        <a asp-action="VisualizarLista" class="btn btn-primary">Voltar à Lista</a>
+                    <div class="content-area">
+                        <h5 class="text-secondary mb-3">Conteúdo:</h5>
+                        <div class="p-3 bg-light rounded">
+                            @{
+                                // Preservar quebras de linha no conteúdo
+                                var conteudoFormatado = Model.Conteudo.Replace("\n", "<br/>");
+                            }
+                            @Html.Raw(conteudoFormatado)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-transparent">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <a asp-action="Editar" asp-route-id="@Model.Id" class="btn btn-success">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a asp-action="VisualizarLista" class="btn btn-outline-primary">
+                                <i class="fas fa-list"></i> Voltar à Lista
+                            </a>
+                        </div>
+
+                        <div>
+                            <!-- Botão de apagar com confirmação -->
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmarApagar">
+                                <i class="fas fa-trash"></i> Apagar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Modal de confirmação para apagar -->
+<div class="modal fade" id="confirmarApagar" tabindex="-1" aria-labelledby="confirmarApagarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmarApagarLabel">Confirmar Eliminação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem a certeza de que deseja apagar o diário <strong>"@Model.Titulo"</strong>?</p>
+                <p class="text-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Esta ação não pode ser desfeita.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form asp-action="ApagarConfirmado" asp-route-id="@Model.Id" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Sim, Apagar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content-area {
+        line-height: 1.6;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0 0 !important;
+    }
+
+    .bg-light {
+        background-color: #f8f9fa !important;
+        border: 1px solid #e9ecef;
+    }
+</style>

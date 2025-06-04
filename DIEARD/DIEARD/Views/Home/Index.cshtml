@@ -2,55 +2,46 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<IdentityUser> UserManager
-@inject UserManager<IdentityUser> UserManager
 @inject SignInManager<IdentityUser> SignInManager
-
-
 
 @{
     ViewData["Title"] = "Página principal";
     IdentityUser user = await UserManager.GetUserAsync(User);
     var email = user?.Email;
-
-
 }
 
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container mt-4">
-
-
         <div class="d-flex justify-content-center mb-5">
             <form action="/search" method="get" class="d-flex align-items-center w-75">
-                <input type="text" name="query" class="form-control form-control-sm rounded-pill px-3 me-2" placeholder="Procurar..." style="height: 32px;" />
-
+                <input type="text" name="query" class="form-control form-control-sm rounded-pill px-3 me-2" placeholder="...🔎" style="height: 32px;" />
                 <button type="submit" class="btn btn-sm btn-outline-secondary rounded-pill" style="height: 32px; line-height: 1;">
                     Procurar
                 </button>
             </form>
         </div>
 
-        
         <div class="d-flex align-items-start mb-4">
-            
+            <!-- Botões laterais -->
             <div class="me-4">
                 <a href="/Diario/Criar" class="btn btn-outline-dark mb-2 w-100">
-                    <i class="bi bi-plus-lg"></i> Criar Diário
+                    <i class="bi bi-plus-lg"></i> Criar meu Diário 📕
                 </a>
                 <a href="/Diario/Visualizar" class="btn btn-outline-dark w-100">
-                    <i class="bi bi-journal-text"></i> Visualizar Diários
+                    <i class="bi bi-journal-text"></i> Visualizar os meus Diários 📖
                 </a>
             </div>
 
-            
+            <!-- Área principal -->
             <div class="flex-grow-1">
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <div class="d-flex align-items-center">
-                        
-                        <div style="width: 120px; height: 120px; background-color: #e0e0e0;" class="me-3 rounded"></div>
+                        @await Component.InvokeAsync("ProfilePhoto", new { size = 120, cssClass = "me-3"})
+
                         <div>
-                            <h3 class="mb-0">@user</h3>
-                            <p class="text-muted">@(await UserManager.GetEmailAsync(user))</p>
+                            <h3 class="mb-0">@(user?.UserName ?? "Utilizador")</h3>
+                            <p class="text-muted">@(user?.Email ?? "Email não disponível")</p>
                         </div>
                     </div>
                     <div class="ms-4">
@@ -61,23 +52,39 @@
                 </div>
 
                 
-                <div style="min-height: 300px; border: 1px solid #ccc; border-radius: 10px; padding: 20px;">
-                    <!-- Conteúdo(diários e conteúdo das pesquisas)-->
-                </div>
             </div>
         </div>
 
-        
-        <div class="text-end">
-            <form asp-area="Identity" asp-page="/Account/Logout" method="post">
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
-        </div>
     </div>
-} else
+}
+else
 {
-    <h1>
-        DIEARD - Diário interativo para escrever e acompanhar a
-        rotina pessoal.
-    </h1>
+    <div class="container text-center mt-5">
+            <div style="background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); max-width: 1000px; width: 100%;">
+                <h1 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">
+                    DIEARD - Diário interativo para escrever e acompanhar a rotina pessoal.
+                </h1>
+            <div class="mt-4">
+                <div class="d-flex gap-3 justify-content-center">
+                    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </div>
+            </div>
+                <ul style="display: flex; gap: 2rem; list-style: none; padding: 0; margin-top: 2rem; flex-wrap: wrap; justify-content: center;">
+                    <li style="flex: 1 1 250px;">
+                        <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">📅 Registre a sua rotina</h4>
+                        <p style="margin: 0.5rem 0 0;">Crie entradas diárias para organizar a sua vida pessoal ou profissional.</p>
+                    </li>
+                    <li style="flex: 1 1 250px;">
+                        <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">📊 Acompanhe o seu progresso</h4>
+                        <p style="margin: 0.5rem 0 0;">Visualize estatísticas sobre hábitos, humor ou objetivos concluídos.</p>
+                    </li>
+                    <li style="flex: 1 1 250px;">
+                        <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">🔒 Privacidade garantida</h4>
+                        <p style="margin: 0.5rem 0 0;">Todos os seus dados são armazenados com segurança.</p>
+                    </li>
+                </ul>
+            </div>
+        
+    </div>
 }

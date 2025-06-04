@@ -4,6 +4,7 @@ using DIEARD.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DIEARD.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250602135555_AdicionarCategorias")]
+    partial class AdicionarCategorias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,35 +53,35 @@ namespace DIEARD.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DataCriacao = new DateTime(2025, 6, 4, 9, 52, 44, 882, DateTimeKind.Local).AddTicks(2824),
+                            DataCriacao = new DateTime(2025, 6, 2, 14, 55, 50, 453, DateTimeKind.Local).AddTicks(5513),
                             Descricao = "Pensamentos e experiências pessoais",
                             Nome = "Pessoal"
                         },
                         new
                         {
                             Id = 2,
-                            DataCriacao = new DateTime(2025, 6, 4, 9, 52, 44, 882, DateTimeKind.Local).AddTicks(2873),
+                            DataCriacao = new DateTime(2025, 6, 2, 14, 55, 50, 453, DateTimeKind.Local).AddTicks(5564),
                             Descricao = "Relacionado ao trabalho e carreira",
                             Nome = "Trabalho"
                         },
                         new
                         {
                             Id = 3,
-                            DataCriacao = new DateTime(2025, 6, 4, 9, 52, 44, 882, DateTimeKind.Local).AddTicks(2875),
+                            DataCriacao = new DateTime(2025, 6, 2, 14, 55, 50, 453, DateTimeKind.Local).AddTicks(5568),
                             Descricao = "Bem-estar físico e mental",
                             Nome = "Saúde"
                         },
                         new
                         {
                             Id = 4,
-                            DataCriacao = new DateTime(2025, 6, 4, 9, 52, 44, 882, DateTimeKind.Local).AddTicks(2876),
+                            DataCriacao = new DateTime(2025, 6, 2, 14, 55, 50, 453, DateTimeKind.Local).AddTicks(5570),
                             Descricao = "Experiências de viagem",
                             Nome = "Viagens"
                         },
                         new
                         {
                             Id = 5,
-                            DataCriacao = new DateTime(2025, 6, 4, 9, 52, 44, 882, DateTimeKind.Local).AddTicks(2878),
+                            DataCriacao = new DateTime(2025, 6, 2, 14, 55, 50, 453, DateTimeKind.Local).AddTicks(5573),
                             Descricao = "Momentos em família",
                             Nome = "Família"
                         });
@@ -118,35 +121,6 @@ namespace DIEARD.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Diarios");
-                });
-
-            modelBuilder.Entity("DIEARD.Models.UserProfile", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FotoPerfil")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -366,17 +340,6 @@ namespace DIEARD.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Categoria");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DIEARD.Models.UserProfile", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithOne()
-                        .HasForeignKey("DIEARD.Models.UserProfile", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });

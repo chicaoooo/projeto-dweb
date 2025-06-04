@@ -1,30 +1,29 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DIEARD.Models
 {
     public class Diario
     {
-        [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "O título é obrigatório.")]
-        [Display(Name = "Título")]
+        [Required(ErrorMessage = "O título é obrigatório")]
+        [StringLength(200, ErrorMessage = "O título não pode exceder 200 caracteres")]
         public string Titulo { get; set; }
 
-        [Required(ErrorMessage = "O conteúdo é obrigatório.")]
-        [Display(Name = "Conteúdo")]
+        [Required(ErrorMessage = "O conteúdo é obrigatório")]
         public string Conteudo { get; set; }
 
-        [Display(Name = "Data de Criação")]
-        public DateTime DataCriacao { get; set; }
+        public DateTime DataCriacao { get; set; } = DateTime.Now;
 
-        [Required]
+        // Relacionamento com User
         public string UserId { get; set; }
-
-        [BindNever]
         public IdentityUser User { get; set; }
+
+        // Relacionamento com Categoria
+        [Required(ErrorMessage = "A categoria é obrigatória")]
+        public int CategoriaId { get; set; }
+        public Categoria Categoria { get; set; }
     }
 }

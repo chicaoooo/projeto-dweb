@@ -4,37 +4,98 @@
     ViewData["Title"] = "Editar Diário";
 }
 
-<h1>Editar Diário</h1>
+<div class="container">
+    <h1>Editar Diário</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Editar" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="UserId" />
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Conteudo" class="control-label"></label>
-                <textarea asp-for="Conteudo" class="form-control"></textarea>
-                <span asp-validation-for="Conteudo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Editar" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="UserId" />
+
+                <div class="mb-3">
+                    <label asp-for="Titulo" class="form-label">Título:</label>
+                    <input asp-for="Titulo" class="form-control" placeholder="Digite o título do seu diário..." />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CategoriaId" class="form-label">Categoria:</label>
+                    <select asp-for="CategoriaId" class="form-select" asp-items="ViewBag.Categorias">
+                        <option value="">Selecione uma categoria...</option>
+                    </select>
+                    <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Conteudo" class="form-label">Conteúdo:</label>
+                    <textarea asp-for="Conteudo" class="form-control" rows="8"
+                              placeholder="Escreva aqui os seus pensamentos e experiências..."></textarea>
+                    <span asp-validation-for="Conteudo" class="text-danger"></span>
+                    <div class="form-text">
+                        <small id="contadorCaracteres" class="text-muted"></small>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="fas fa-save"></i> Guardar Alterações
+                    </button>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Visualizar" asp-route-id="@Model.Id" class="btn btn-outline-primary flex-fill">
+                            <i class="fas fa-eye"></i> Ver Detalhes
+                        </a>
+                        <a asp-action="VisualizarLista" class="btn btn-outline-secondary flex-fill">
+                            <i class="fas fa-list"></i> Voltar à Lista
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="VisualizarLista">Voltar à Lista</a>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        // Contador de caracteres
+        const conteudoTextarea = document.querySelector('[name="Conteudo"]');
+        const contador = document.getElementById('contadorCaracteres');
+
+        function atualizarContador() {
+            contador.textContent = conteudoTextarea.value.length + ' caracteres';
+        }
+
+        // Inicializar contador
+        atualizarContador();
+
+        conteudoTextarea.addEventListener('input', atualizarContador);
+
+        // Auto-resize do textarea
+        conteudoTextarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Inicializar altura do textarea
+        conteudoTextarea.style.height = (conteudoTextarea.scrollHeight) + 'px';
+
+        // Validação no frontend
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const titulo = document.querySelector('[name="Titulo"]').value.trim();
+            const categoria = document.querySelector('[name="CategoriaId"]').value;
+            const conteudo = document.querySelector('[name="Conteudo"]').value.trim();
+
+            if (!titulo || !categoria || !conteudo) {
+                e.preventDefault();
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return false;
+            }
+        });
+    </script>
 }

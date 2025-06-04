@@ -35,9 +35,43 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// ROTAS ESPECÍFICAS PARA USERDIARIES - ADICIONAR ANTES DA ROTA DEFAULT
+app.MapControllerRoute(
+    name: "userDiaries",
+    pattern: "Home/UserDiaries",
+    defaults: new { controller = "Diario", action = "UserDiaries" });
+
+app.MapControllerRoute(
+    name: "diarioUserDiaries",
+    pattern: "Diario/UserDiaries",
+    defaults: new { controller = "Diario", action = "UserDiaries" });
+
+// ROTAS DE DEBUG
+app.MapControllerRoute(
+    name: "debugCategorias",
+    pattern: "Diario/DebugCategorias",
+    defaults: new { controller = "Diario", action = "DebugCategorias" });
+
+app.MapControllerRoute(
+    name: "userDiariesSimple",
+    pattern: "Diario/UserDiariesSimple",
+    defaults: new { controller = "Diario", action = "UserDiariesSimple" });
+
+app.MapControllerRoute(
+    name: "testeCategorias",
+    pattern: "Diario/TesteCategorias",
+    defaults: new { controller = "Diario", action = "TesteCategorias" });
+
+app.MapControllerRoute(
+    name: "testeSimples",
+    pattern: "Diario/TesteSimples",
+    defaults: new { controller = "Diario", action = "TesteSimples" });
+
+// ROTA DEFAULT - DEVE SER A ÚLTIMA
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

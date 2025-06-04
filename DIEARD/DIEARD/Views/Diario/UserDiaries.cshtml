@@ -1,0 +1,169 @@
+﻿@model List<DIEARD.Models.Diario>
+@{
+    ViewData["Title"] = "Diários de " + ViewBag.UserName;
+    var categorias = ViewBag.Categorias as Microsoft.AspNetCore.Mvc.Rendering.SelectList;
+    var categoriasDebug = ViewBag.CategoriasDebug as List<DIEARD.Models.Categoria>;
+    var categoriaSelecionada = ViewBag.CategoriaSelecionada?.ToString();
+}
+
+<div class="container">
+    <h1>Diários de @ViewBag.UserName</h1>
+
+    <!-- Filtro por categoria -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="get" asp-action="UserDiaries" class="d-inline-flex align-items-center">
+                <input type="hidden" name="userId" value="@ViewBag.UserId" />
+                <input type="hidden" name="query" value="@ViewBag.CurrentSearchTerm" />
+                <label for="categoriaId" class="form-label me-2 mb-0">Categoria:</label>
+                <select name="categoriaId" id="categoriaId" class="form-select me-2" onchange="this.form.submit()" style="width: auto;">
+                    <option value="">Todas as categorias</option>
+                    
+                    @if (categorias != null && categorias.Any())
+                    {
+                        @foreach (var categoria in categorias)
+                        {
+                            <option value="@categoria.Value" selected="@categoria.Selected">
+                                @categoria.Text
+                            </option>
+                        }
+                    }
+                    else if (categoriasDebug != null && categoriasDebug.Any())
+                    {
+                        @foreach (var categoria in categoriasDebug)
+                        {
+                            var isSelected = categoriaSelecionada != null && categoriaSelecionada == categoria.Id.ToString();
+                            <option value="@categoria.Id" selected="@isSelected">
+                                @categoria.Nome
+                            </option>
+                        }
+                    }
+                </select>
+            </form>
+        </div>
+        <div class="col-md-6 text-end">
+            @if (!string.IsNullOrEmpty(ViewBag.CurrentSearchTerm as string))
+            {
+                <a asp-action="Search" asp-route-query="@ViewBag.CurrentSearchTerm" class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar à Pesquisa
+                </a>
+            }
+            
+            @if (ViewBag.CategoriaSelecionada != null)
+            {
+                <a asp-action="UserDiaries" asp-route-userId="@ViewBag.UserId" asp-route-query="@ViewBag.CurrentSearchTerm" class="btn btn-outline-info">
+                    <i class="fas fa-times"></i> Limpar Filtro
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Lista de diários -->
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var diario in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">@(diario.Categoria?.Nome ?? "Sem categoria")</span>
+                            <small class="text-muted">@diario.DataCriacao.ToString("dd/MM/yyyy")</small>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@diario.Titulo</h5>
+                            <p class="card-text">
+                                @{
+                                    var conteudoResumo = !string.IsNullOrEmpty(diario.Conteudo) && diario.Conteudo.Length > 100
+                                    ? diario.Conteudo.Substring(0, 100) + "..."
+                                    : diario.Conteudo;
+                                }
+                                @conteudoResumo
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            @if (ViewBag.IsCurrentUser == true)
+                            {
+                                <!-- Botões para o dono dos diários (pode ver, editar e apagar) -->
+                                <div class="d-flex gap-1 flex-wrap">
+                                    <a asp-controller="Diario" asp-action="Detalhes" asp-route-id="@diario.Id" class="btn btn-outline-primary btn-sm flex-fill">
+                                        <i class="fas fa-eye me-1" aria-hidden="true"></i>Ver
+                                    </a>
+                                    <a asp-controller="Diario" asp-action="Editar" asp-route-id="@diario.Id" class="btn btn-outline-success btn-sm flex-fill text-center">
+                                        <i class="fas fa-edit me-1" aria-hidden="true"></i>Editar
+                                    </a>
+                                    <form asp-action="Apagar" asp-route-id="@diario.Id" method="post" class="flex-fill" 
+                                          onsubmit="return confirm('Tem a certeza que deseja apagar este diário?')">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm w-100" title="Apagar diário">
+                                            <i class="fas fa-trash me-1" aria-hidden="true"></i>Apagar
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <!-- Botão para visitantes (só pode ver detalhes) -->
+                                <div class="d-grid">
+                                    <a asp-controller="Diario" asp-action="Detalhes" asp-route-id="@diario.Id" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye me-1" aria-hidden="true"></i>Ver Detalhes
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Informações sobre os resultados -->
+        <div class="mt-4 text-center">
+            <small class="text-muted">
+                A mostrar @Model.Count diário(s)
+                @if (ViewBag.CategoriaSelecionada != null)
+                {
+                    <text> na categoria selecionada</text>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.CurrentSearchTerm as string))
+                {
+                    <text> para "@ViewBag.CurrentSearchTerm"</text>
+                }
+            </small>
+        </div>
+    }
+    else
+    {
+        <div class="text-center mt-5">
+            <div class="mb-4">
+                <i class="fas fa-book-open fa-3x text-muted" aria-hidden="true"></i>
+            </div>
+            @if (!string.IsNullOrEmpty(categoriaSelecionada))
+            {
+                <h4>Nenhum diário encontrado nesta categoria</h4>
+                <p class="text-muted">@ViewBag.UserName não possui diários na categoria selecionada.</p>
+                <a href="@Url.Action("UserDiaries", new { userId = ViewBag.UserId, query = ViewBag.CurrentSearchTerm })" class="btn btn-outline-primary mt-3">
+                    <i class="fas fa-list" aria-hidden="true"></i> Ver todos os diários
+                </a>
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.CurrentSearchTerm as string))
+            {
+                <h4>Nenhum diário encontrado</h4>
+                <p class="text-muted">@ViewBag.UserName não possui diários que correspondam à pesquisa "@ViewBag.CurrentSearchTerm".</p>
+                <a href="@Url.Action("UserDiaries", new { userId = ViewBag.UserId })" class="btn btn-outline-primary mt-3">
+                    <i class="fas fa-list" aria-hidden="true"></i> Ver todos os diários
+                </a>
+            }
+            else
+            {
+                <h4>@ViewBag.UserName não tem diários</h4>
+                <p class="text-muted">Este utilizador ainda não criou nenhum diário.</p>
+            }
+            
+            @if (!string.IsNullOrEmpty(ViewBag.CurrentSearchTerm as string))
+            {
+                <a asp-action="Search" asp-route-query="@ViewBag.CurrentSearchTerm" class="btn btn-secondary mt-3">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar à Pesquisa
+                </a>
+            }
+        </div>
+    }
+</div>
