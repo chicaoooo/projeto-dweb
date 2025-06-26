@@ -43,9 +43,13 @@ using (var scope = app.Services.CreateScope())
         var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-        // Inicializar dados e aplicar migrations
-        await DbInicializerDev.Initialize(context, userManager, roleManager);
+    
+
+        // 1. Aplica quaisquer migrações pendentes para atualizar a ESTRUTURA da BD. (azure)
         context.Database.Migrate();
+
+        // 2. Inicializa os DADOS (roles, admin, etc.) na BD já atualizada. (azure)
+        await DbInicializerDev.Initialize(context, userManager, roleManager);
     }
     catch (Exception ex)
     {

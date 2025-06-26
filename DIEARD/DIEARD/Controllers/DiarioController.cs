@@ -108,7 +108,7 @@ public class DiarioController : Controller
     // POST: /Diario/Create - Processa a submissão do formulário de criação de diário.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Titulo", "Conteudo", "CategoriaId")] Diarios diario)
+    public async Task<IActionResult> Create([Bind("Titulo,Conteudo,CategoriaId,MoodTracker")] Diarios diario) // ALTERAÇÃO AQUI
     {
         var fieldsToRemove = new[] { "User", "UserId", "Categoria" };
         foreach (var field in fieldsToRemove)
@@ -211,7 +211,7 @@ public class DiarioController : Controller
     // POST: /Diario/Edit/5 - Processa a submissão do formulário de edição de diário.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Conteudo,CategoriaId")] Diarios diario)
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Conteudo,CategoriaId,MoodTracker")] Diarios diario) // ALTERAÇÃO AQUI
     {
         if (id != diario.Id)
         {

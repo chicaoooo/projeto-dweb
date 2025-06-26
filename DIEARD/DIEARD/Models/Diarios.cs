@@ -30,6 +30,10 @@ namespace DIEARD.Models
 
         public DateTime DataCriacao { get; set; } = DateTime.Now;
 
-        
+        /// <summary>
+        /// Representa numéricamente o estado de humor associado ao diário.
+        /// </summary>
+        [Range(0, 100, ErrorMessage = "O valor do humor deve estar entre 0 e 100.")]
+        public int? MoodTracker { get; set; }
     }
 }

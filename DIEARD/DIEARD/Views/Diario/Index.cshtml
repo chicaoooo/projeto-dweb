@@ -54,6 +54,24 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">@diario.Titulo</h5>
+
+                            <!-- moodtracker -->
+                            @if (diario.MoodTracker.HasValue)
+                            {
+                                var moodValue = diario.MoodTracker.Value;
+                                string moodColorClass = moodValue >= 70 ? "bg-success" : (moodValue >= 40 ? "bg-warning" : "bg-danger");
+
+                                <div class="progress mb-2" style="height: 8px;" title="Humor: @moodValue/100">
+                                    <div class="progress-bar @moodColorClass" 
+                                         role="progressbar" 
+                                         style="width: @(moodValue)%;" 
+                                         aria-valuenow="@moodValue" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                            }
+
                             <p class="card-text">
                                 @{
                                     var conteudoResumo = !string.IsNullOrEmpty(diario.Conteudo) && diario.Conteudo.Length > 100
