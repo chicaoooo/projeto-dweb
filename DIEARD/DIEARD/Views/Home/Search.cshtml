@@ -1,39 +1,82 @@
 ﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
 
 @{
-    ViewData["Title"] = "Resultados da Pesquisa";
+    ViewData["Title"] = "Pesquisar Utilizadores";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4>Pesquisar Utilizadores</h4>
+        </div>
+        <div class="card-body">
+            <!-- Formulário de pesquisa -->
+            <form method="get" class="mb-4">
+                <div class="input-group">
+                    <input type="text" name="query" value="@ViewBag.SearchQuery"
+                           class="form-control" placeholder="Digite nome ou email..." required>
+                    <button class="btn btn-primary" type="submit">Pesquisar</button>
+                </div>
+            </form>
 
-@if (Model != null && Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nome de Utilizador</th>
-                <th>Email</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
+            <!-- Resultados -->
+            @if (Model != null && Model.Any())
             {
-                <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>
-                        <a asp-action="UserDiaries" asp-route-userId="@user.Id" class="btn btn-sm btn-primary">Ver Diários</a>
-                    </td>
-                </tr>
+                <p>Encontrados <strong>@Model.Count</strong> utilizador(es).</p>
+
+                @foreach (var user in Model)
+                {
+                    <div class="border p-3 mb-2 rounded">
+                        <strong>@user.UserName</strong> - @user.Email
+
+                        <div class="mt-2">
+                            @if ((bool?)ViewData[$"JaAmigo_{user.Id}"] == true)
+                            {
+                                <span class="badge bg-success">Amigos</span>
+                                <a href="/Amizade/DiariosDo?amigoId=@user.Id" class="btn btn-sm btn-primary">Ver Diários</a>
+                            }
+                            else if ((bool?)ViewData[$"PedidoPendente_{user.Id}"] == true)
+                            {
+                                <span class="badge bg-warning">Pedido Pendente</span>
+                            }
+                            else
+                            {
+                                <form method="post" asp-controller="Amizade" asp-action="EnviarPedido" style="display: inline;">
+                                    <input type="hidden" name="destinatarioId" value="@user.Id">
+                                    <input type="text" name="mensagem" value="Olá! Gostava de ser seu amigo.">
+                                    <button type="submit" class="btn btn-sm btn-success">Enviar Pedido</button>
+                                    @Html.AntiForgeryToken()
+                                </form>
+                            }
+                        </div>
+                    </div>
+                }
             }
-        </tbody>
-    </table>
-}
-else
+            else if (!string.IsNullOrEmpty(ViewBag.SearchQuery))
+            {
+                <p class="text-muted">Nenhum utilizador encontrado com "@ViewBag.SearchQuery".</p>
+            }
+            else
+            {
+                <p class="text-muted">Digite um nome ou email para encontrar utilizadores.</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["SuccessMessage"] != null)
 {
-    <p>Nenhum utilizador encontrado para a sua pesquisa.</p>
+    <div class="alert alert-success alert-dismissible">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
 }
 
-<br />
-<a asp-action="Index">Voltar à Página Inicial</a>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

@@ -1,0 +1,84 @@
+﻿@model DIEARD.Models.Diarios
+
+@{
+    ViewData["Title"] = "Criar Novo Diário";
+}
+
+<div class="main-content">
+    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+    <form method="post" class="row justify-content-center">
+        <div class="col-md-8">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label for="Titulo" class="form-label">Título:</label>
+                <input type="text" id="Titulo" name="Titulo" class="form-control"
+                       placeholder="Digite o título do seu diário..." required />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="CategoriaId" class="form-label">Categoria:</label>
+                <select id="CategoriaId" name="CategoriaId" class="form-select" required>
+                    <option value="">Selecione uma categoria...</option>
+                    @foreach (var categoria in ViewBag.Categorias as Microsoft.AspNetCore.Mvc.Rendering.SelectList)
+                    {
+                        <option value="@categoria.Value">@categoria.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Conteudo" class="form-label">Conteúdo:</label>
+                <textarea id="Conteudo" name="Conteudo" class="form-control" rows="8"
+                          placeholder="Escreva aqui os seus pensamentos e experiências..." required></textarea>
+                <span asp-validation-for="Conteudo" class="text-danger"></span>
+                <div class="form-text">
+                    <small id="contadorCaracteres" class="text-muted">0 caracteres</small>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-save"></i> Guardar Diário
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar à Lista
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Contador de caracteres
+        document.getElementById('Conteudo').addEventListener('input', function() {
+            const contador = document.getElementById('contadorCaracteres');
+            contador.textContent = this.value.length + ' caracteres';
+        });
+
+        // Auto-resize do textarea
+        document.getElementById('Conteudo').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Validação adicional no frontend
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const titulo = document.getElementById('Titulo').value.trim();
+            const categoria = document.getElementById('CategoriaId').value;
+            const conteudo = document.getElementById('Conteudo').value.trim();
+
+            if (!titulo || !categoria || !conteudo) {
+                e.preventDefault();
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return false;
+            }
+        });
+    </script>
+}

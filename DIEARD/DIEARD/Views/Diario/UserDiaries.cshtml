@@ -1,8 +1,8 @@
-﻿@model List<DIEARD.Models.Diario>
+﻿@model List<DIEARD.Models.Diarios>
 @{
     ViewData["Title"] = "Diários de " + ViewBag.UserName;
     var categorias = ViewBag.Categorias as Microsoft.AspNetCore.Mvc.Rendering.SelectList;
-    var categoriasDebug = ViewBag.CategoriasDebug as List<DIEARD.Models.Categoria>;
+    var categoriasDebug = ViewBag.CategoriasDebug as List<DIEARD.Models.Categorias>;
     var categoriaSelecionada = ViewBag.CategoriaSelecionada?.ToString();
 }
 
@@ -92,7 +92,7 @@
                                     <a asp-controller="Diario" asp-action="Editar" asp-route-id="@diario.Id" class="btn btn-outline-success btn-sm flex-fill text-center">
                                         <i class="fas fa-edit me-1" aria-hidden="true"></i>Editar
                                     </a>
-                                    <form asp-action="Apagar" asp-route-id="@diario.Id" method="post" class="flex-fill" 
+                                    <form asp-action="Delete" asp-route-id="@diario.Id" method="post" class="flex-fill" 
                                           onsubmit="return confirm('Tem a certeza que deseja apagar este diário?')">
                                         <button type="submit" class="btn btn-outline-danger btn-sm w-100" title="Apagar diário">
                                             <i class="fas fa-trash me-1" aria-hidden="true"></i>Apagar
@@ -104,9 +104,10 @@
                             {
                                 <!-- Botão para visitantes (só pode ver detalhes) -->
                                 <div class="d-grid">
-                                    <a asp-controller="Diario" asp-action="Detalhes" asp-route-id="@diario.Id" class="btn btn-outline-primary btn-sm">
+                                    <a asp-controller="Diario" asp-action="Details" asp-route-id="@diario.Id" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-eye me-1" aria-hidden="true"></i>Ver Detalhes
                                     </a>
+                                    
                                 </div>
                             }
                         </div>
@@ -139,7 +140,7 @@
             @if (!string.IsNullOrEmpty(categoriaSelecionada))
             {
                 <h4>Nenhum diário encontrado nesta categoria</h4>
-                <p class="text-muted">@ViewBag.UserName não possui diários na categoria selecionada.</p>
+                <p class="text-muted">@ViewBag.UserName não tem diários na categoria selecionada.</p>
                 <a href="@Url.Action("UserDiaries", new { userId = ViewBag.UserId, query = ViewBag.CurrentSearchTerm })" class="btn btn-outline-primary mt-3">
                     <i class="fas fa-list" aria-hidden="true"></i> Ver todos os diários
                 </a>
@@ -147,7 +148,7 @@
             else if (!string.IsNullOrEmpty(ViewBag.CurrentSearchTerm as string))
             {
                 <h4>Nenhum diário encontrado</h4>
-                <p class="text-muted">@ViewBag.UserName não possui diários que correspondam à pesquisa "@ViewBag.CurrentSearchTerm".</p>
+                <p class="text-muted">@ViewBag.UserName não tem diários que correspondam à pesquisa "@ViewBag.CurrentSearchTerm".</p>
                 <a href="@Url.Action("UserDiaries", new { userId = ViewBag.UserId })" class="btn btn-outline-primary mt-3">
                     <i class="fas fa-list" aria-hidden="true"></i> Ver todos os diários
                 </a>

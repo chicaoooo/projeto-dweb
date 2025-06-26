@@ -1,77 +1,90 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using DIEARD.Data;
-using Microsoft.Extensions.Logging; // Adicione esta linha
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+// Connection string
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
+    throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+// Configurar o DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+// Para melhor debugging durante desenvolvimento
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+// Configuração do Identity
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+})
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
 
-// Adicione esta linha explicitamente
-builder.Services.AddLogging();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Aplica automaticamente as migrations ao arrancar, em qualquer ambiente (inclui Azure)
+using (var scope = app.Services.CreateScope())
 {
-    app.UseMigrationsEndPoint();
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        // Inicializar dados e aplicar migrations
+        await DbInicializerDev.Initialize(context, userManager, roleManager);
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding or migrating the database.");
+    }
+}
+
+// Configurações específicas de produção
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    // Em desenvolvimento, mostra erros detalhados
+    app.UseMigrationsEndPoint();
 }
-app.UseStaticFiles();
 
+// Middleware padrão ASP.NET Core
+app.UseStaticFiles();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
-// ROTAS ESPECÍFICAS PARA USERDIARIES - ADICIONAR ANTES DA ROTA DEFAULT
+// Rota personalizada
 app.MapControllerRoute(
     name: "userDiaries",
     pattern: "Home/UserDiaries",
     defaults: new { controller = "Diario", action = "UserDiaries" });
 
-app.MapControllerRoute(
-    name: "diarioUserDiaries",
-    pattern: "Diario/UserDiaries",
-    defaults: new { controller = "Diario", action = "UserDiaries" });
-
-// ROTAS DE DEBUG
-app.MapControllerRoute(
-    name: "debugCategorias",
-    pattern: "Diario/DebugCategorias",
-    defaults: new { controller = "Diario", action = "DebugCategorias" });
-
-app.MapControllerRoute(
-    name: "userDiariesSimple",
-    pattern: "Diario/UserDiariesSimple",
-    defaults: new { controller = "Diario", action = "UserDiariesSimple" });
-
-app.MapControllerRoute(
-    name: "testeCategorias",
-    pattern: "Diario/TesteCategorias",
-    defaults: new { controller = "Diario", action = "TesteCategorias" });
-
-app.MapControllerRoute(
-    name: "testeSimples",
-    pattern: "Diario/TesteSimples",
-    defaults: new { controller = "Diario", action = "TesteSimples" });
-
-// ROTA DEFAULT - DEVE SER A ÚLTIMA
+// Rota padrão
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
-app.Run();
+// Iniciar a aplicação
+await app.RunAsync();

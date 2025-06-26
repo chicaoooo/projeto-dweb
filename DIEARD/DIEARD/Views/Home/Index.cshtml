@@ -22,69 +22,207 @@
             </form>
         </div>
 
+        
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle"></i> @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
         <div class="d-flex align-items-start mb-4">
             <!-- Botões laterais -->
-            <div class="me-4">
-                <a href="/Diario/Criar" class="btn btn-outline-dark mb-2 w-100">
-                    <i class="bi bi-plus-lg"></i> Criar meu Diário 📕
-                </a>
-                <a href="/Diario/Visualizar" class="btn btn-outline-dark w-100">
-                    <i class="bi bi-journal-text"></i> Visualizar os meus Diários 📖
-                </a>
-            </div>
-
-            <!-- Área principal -->
-            <div class="flex-grow-1">
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <div class="d-flex align-items-center">
-                        @await Component.InvokeAsync("ProfilePhoto", new { size = 120, cssClass = "me-3"})
-
-                        <div>
-                            <h3 class="mb-0">@(user?.UserName ?? "Utilizador")</h3>
-                            <p class="text-muted">@(user?.Email ?? "Email não disponível")</p>
-                        </div>
+            <div class="me-4" style="min-width: 300px;">
+                <!-- Diários -->
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0"><i class="bi bi-journal-text"></i> Meus Diários</h6>
                     </div>
-                    <div class="ms-4">
-                        <a href="/Profile/Editar" class="btn btn-outline-secondary">
-                            <i class="bi bi-pencil"></i> Editar Perfil
+                    <div class="card-body p-2">
+                        <a href="/Diario/Create" class="btn btn-primary mb-2 w-100 btn-sm">
+                            <i class="bi bi-plus-lg"></i> Criar Novo Diário ✍️
+                        </a>
+                        <a href="/Diario/Index" class="btn btn-outline-primary w-100 btn-sm">
+                            <i class="bi bi-journal-text"></i> Ver os Meus Diários 📖
+                            @if (ViewBag.NumeroDiarios != null && ViewBag.NumeroDiarios > 0)
+                            {
+                                <span class="badge bg-primary ms-1">@ViewBag.NumeroDiarios</span>
+                            }
                         </a>
                     </div>
                 </div>
 
+                <!-- Amizades -->
+                <div class="card mb-3">
+                    <div class="card-header bg-success text-white">
+                        <h6 class="mb-0"><i class="bi bi-people"></i> Amizades</h6>
+                    </div>
+                    <div class="card-body p-2">
+                        <a href="/Amizade/Index" class="btn btn-outline-success mb-2 w-100 btn-sm">
+                            <i class="bi bi-people"></i> Minhas Amizades
+                            @if (ViewBag.NumeroAmigos != null && ViewBag.NumeroAmigos > 0)
+                            {
+                                <span class="badge bg-success ms-1">@ViewBag.NumeroAmigos</span>
+                            }
+                        </a>
+                        
+
+                        
+                        <div class="d-flex gap-1">
+                            <a href="/Amizade/PedidosRecebidos" class="btn btn-outline-warning flex-fill btn-sm">
+                                <i class="bi bi-inbox"></i> Recebidos
+                                @if (ViewBag.PedidosPendentes != null && ViewBag.PedidosPendentes > 0)
+                                {
+                                    <span class="badge bg-warning text-dark ms-1">@ViewBag.PedidosPendentes</span>
+                                }
+                            </a>
+                            <a href="/Amizade/PedidosEnviados" class="btn btn-outline-secondary flex-fill btn-sm">
+                                <i class="bi bi-send"></i> Enviados
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 
+                @if (ViewBag.PedidosPendentes != null && ViewBag.PedidosPendentes > 0)
+                {
+                    <div class="alert alert-warning p-3 animate-pulse">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-bell-fill text-warning me-2" style="font-size: 1.2rem;"></i>
+                            <div>
+                                <strong>@ViewBag.PedidosPendentes</strong> pedido(s) de amizade!
+                                <br>
+                                <small>
+                                    <a href="/Amizade/PedidosRecebidos" class="text-decoration-none">
+                                        <i class="bi bi-arrow-right"></i> Ver pedidos
+                                    </a>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Área principal -->
+            <div class="flex-grow-1">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3"
+                                     style="width: 60px; height: 60px;">
+                                    <i class="bi bi-person-fill text-white" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1">
+                                        @(ViewBag.UtilizadorNome ?? user?.UserName ?? "Utilizador")
+                                        @if (ViewBag.IsAdmin == true)
+                                        {
+                                            <span class="badge bg-danger ms-2">ADMIN</span>
+                                        }
+                                    </h4>
+                                    <p class="text-muted mb-1">@(user?.Email ?? "Email não disponível")</p>
+
+                                    <!-- Estatísticas do utilizador -->
+                                    <div class="d-flex gap-3 text-muted small">
+                                        @if (ViewBag.NumeroDiarios != null)
+                                        {
+                                            <span><i class="bi bi-journal-text"></i> @ViewBag.NumeroDiarios diário(s)</span>
+                                        }
+                                        @if (ViewBag.NumeroAmigos != null)
+                                        {
+                                            <span><i class="bi bi-people"></i> @ViewBag.NumeroAmigos amigo(s)</span>
+                                        }
+                                        @if (ViewBag.PedidosPendentes != null && ViewBag.PedidosPendentes > 0)
+                                        {
+                                            <span class="text-warning">
+                                                <i class="bi bi-bell"></i> @ViewBag.PedidosPendentes pendente(s)
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <a asp-controller="Utilizador" asp-action="Edit" class="btn btn-outline-secondary">
+                                    <i class="bi bi-pencil"></i> Editar Perfil
+                                </a>
+
+                                @if (ViewBag.IsAdmin == true)
+                                {
+                                    <a href="/search" class="btn btn-warning">
+                                        <i class="bi bi-shield-check"></i> Pesquisa Admin
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                        <!-- Dicas -->
+                        <div class="mt-4">
+                            <div class="alert alert-light border text-center">
+                                <i class="bi bi-lightbulb text-warning"></i>
+                                <strong>Dica do dia:</strong>
+                                @if (ViewBag.NumeroAmigos == 0)
+                                {
+                                    <span>Comece a adicionar alguns amigos para partilhar os diários!</span>
+                                }
+                                else if (ViewBag.NumeroDiarios == 0)
+                                {
+                                    <span>Que tal criar o primeiro diário hoje?</span>
+                                }
+                                else
+                                {
+                                    <span>Continue a escrever diários com os seus momentos e a conectar-se com amigos!</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-    </div>
+    
 }
 else
 {
     <div class="container text-center mt-5">
-            <div style="background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); max-width: 1000px; width: 100%;">
-                <h1 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">
-                    DIEARD - Diário interativo para escrever e acompanhar a rotina pessoal.
-                </h1>
+        <div style="background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); max-width: 1000px; width: 100%; margin: 0 auto;">
+            <h1 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">
+                DIEARD - Diário interativo para escrever e acompanhar a rotina pessoal.
+            </h1>
             <div class="mt-4">
                 <div class="d-flex gap-3 justify-content-center">
                     <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
                     <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
                 </div>
             </div>
-                <ul style="display: flex; gap: 2rem; list-style: none; padding: 0; margin-top: 2rem; flex-wrap: wrap; justify-content: center;">
-                    <li style="flex: 1 1 250px;">
-                        <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">📅 Registre a sua rotina</h4>
-                        <p style="margin: 0.5rem 0 0;">Crie entradas diárias para organizar a sua vida pessoal ou profissional.</p>
-                    </li>
-                    <li style="flex: 1 1 250px;">
-                        <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">📊 Acompanhe o seu progresso</h4>
-                        <p style="margin: 0.5rem 0 0;">Visualize estatísticas sobre hábitos, humor ou objetivos concluídos.</p>
-                    </li>
-                    <li style="flex: 1 1 250px;">
-                        <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">🔒 Privacidade garantida</h4>
-                        <p style="margin: 0.5rem 0 0;">Todos os seus dados são armazenados com segurança.</p>
-                    </li>
-                </ul>
-            </div>
-        
+            <ul style="display: flex; gap: 2rem; list-style: none; padding: 0; margin-top: 2rem; flex-wrap: wrap; justify-content: center;">
+                <li style="flex: 1 1 250px;">
+                    <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">📅 Registre a sua rotina</h4>
+                    <p style="margin: 0.5rem 0 0;">Crie entradas diárias para organizar a sua vida pessoal ou profissional.</p>
+                </li>
+                <li style="flex: 1 1 250px;">
+                    <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">📊 Acompanhe o seu progresso</h4>
+                    <p style="margin: 0.5rem 0 0;">Visualize estatísticas sobre hábitos, humor ou objetivos concluídos.</p>
+                </li>
+                <li style="flex: 1 1 250px;">
+                    <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">🔒 Privacidade garantida</h4>
+                    <p style="margin: 0.5rem 0 0;">Todos os seus dados são armazenados com segurança.</p>
+                </li>
+                <li style="flex: 1 1 250px;">
+                    <h4 style="font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">👥 Conecte com amigos</h4>
+                    <p style="margin: 0.5rem 0 0;">Adicione amigos e partilhe os seus diários de forma segura.</p>
+                </li>
+            </ul>
+        </div>
     </div>
 }

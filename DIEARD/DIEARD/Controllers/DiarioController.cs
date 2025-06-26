@@ -1,53 +1,87 @@
-﻿using DIEARD.Models;
+using DIEARD.Models;
 using DIEARD.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
+using System.Collections.Generic;
 
 [Authorize]
 public class DiarioController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<IdentityUser> _userManager;
-    private readonly ILogger<DiarioController> _logger;
 
-    public DiarioController(ApplicationDbContext context, UserManager<IdentityUser> userManager, ILoggerFactory loggerFactory)
+    // Construtor do controlador que injeta as dependências necessárias.
+    public DiarioController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context = context;
         _userManager = userManager;
-        _logger = loggerFactory.CreateLogger<DiarioController>();
     }
 
-    // GET: /Diario
+    // Verifica se dois utilizadores são amigos.
+    private async Task<bool> SaoAmigos(string userId1, string userId2)
+    {
+        if (userId1 == userId2) return true;
+
+        return await _context.Amizades
+            .AnyAsync(a =>
+                (a.UtilizadorId == userId1 && a.AmigoId == userId2) ||
+                (a.UtilizadorId == userId2 && a.AmigoId == userId1));
+    }
+
+    // Verifica se um utilizador tem permissão para ver os diários de outro.
+    private async Task<bool> PodeVerDiarios(string viewerId, string ownerId)
+    {
+        if (User.IsInRole("Administrador")) return true;
+        return await SaoAmigos(viewerId, ownerId);
+    }
+
+    // GET: /Diario - Exibe os diários com base nas permissões do utilizador.
     public async Task<IActionResult> Index(int? categoriaId)
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
+        if (user == null) return NotFound();
+
+        var isAdmin = User.IsInRole("Administrador");
+        IQueryable<Diarios> query;
+
+        if (isAdmin)
         {
-            return NotFound();
+            query = _context.Diarios.Include(d => d.Categoria).Include(d => d.User);
+        }
+        else
+        {
+            var amizadesDoUser = await _context.Amizades
+                .Where(a => a.UtilizadorId == user.Id || a.AmigoId == user.Id)
+                .ToListAsync();
+
+            var amigosIds = amizadesDoUser
+                .Select(a => a.UtilizadorId == user.Id ? a.AmigoId : a.UtilizadorId)
+                .ToList();
+
+            amigosIds.Add(user.Id);
+
+            query = _context.Diarios
+                .Include(d => d.Categoria)
+                .Include(d => d.User)
+                .Where(d => d.UserId == user.Id);
         }
 
-        var query = _context.Diarios
-            .Include(d => d.Categoria)
-            .Where(d => d.UserId == user.Id);
-
-        // Aplicar filtro por categoria se especificado
         if (categoriaId.HasValue && categoriaId.Value > 0)
         {
             query = query.Where(d => d.CategoriaId == categoriaId.Value);
         }
 
-        var diariosDoUsuario = await query
+        var diarios = await query
             .OrderByDescending(d => d.DataCriacao)
             .ToListAsync();
 
-        // Carregar categorias para o dropdown
         ViewBag.Categorias = await _context.Categorias
             .Select(c => new SelectListItem
             {
@@ -58,36 +92,35 @@ public class DiarioController : Controller
             .ToListAsync();
 
         ViewBag.CategoriaSelecionada = categoriaId;
+        ViewBag.IsAdmin = isAdmin;
+        ViewBag.CurrentUserId = user.Id;
 
-        return View("Visualizar", diariosDoUsuario);
+        return View("Index", diarios);
     }
 
-    // GET: /Diario/Criar
-    public async Task<IActionResult> Criar()
+    // GET: /Diario/Create - Exibe o formulário para criar um novo diário.
+    public async Task<IActionResult> Create()
     {
-        // Carregar categorias para o dropdown
         ViewBag.Categorias = new SelectList(await _context.Categorias.ToListAsync(), "Id", "Nome");
         return View();
     }
 
-    // POST: /Diario/Criar
+    // POST: /Diario/Create - Processa a submissão do formulário de criação de diário.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Criar([Bind("Titulo", "Conteudo", "CategoriaId")] Diario diario)
+    public async Task<IActionResult> Create([Bind("Titulo", "Conteudo", "CategoriaId")] Diarios diario)
     {
-        _logger.LogInformation("A tentar criar um novo diário.");
-
-        // Remover erros de validação para propriedades que serão definidas no servidor
-        ModelState.Remove("User");
-        ModelState.Remove("UserId");
-        ModelState.Remove("Categoria");
+        var fieldsToRemove = new[] { "User", "UserId", "Categoria" };
+        foreach (var field in fieldsToRemove)
+        {
+            ModelState.Remove(field);
+        }
 
         if (ModelState.IsValid)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                _logger.LogWarning("Utilizador não encontrado ao criar o diário.");
                 return NotFound();
             }
 
@@ -95,35 +128,23 @@ public class DiarioController : Controller
             diario.DataCriacao = DateTime.Now;
             _context.Add(diario);
 
-            _logger.LogInformation("Diário adicionado ao contexto. A chamar SaveChangesAsync.");
             try
             {
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("Diário guardado com sucesso.");
-                return RedirectToAction(nameof(Visualizar));
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                _logger.LogError($"Erro ao guardar o diário: {ex.Message}");
                 ModelState.AddModelError("", "Ocorreu um erro ao guardar o diário.");
             }
         }
 
-        // Recarregar categorias em caso de erro
         ViewBag.Categorias = new SelectList(await _context.Categorias.ToListAsync(), "Id", "Nome", diario.CategoriaId);
-        _logger.LogWarning($"ModelState inválido ao criar o diário. Erros: {string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))}");
         return View(diario);
     }
 
-    // GET: /Diario/Visualizar (Lista de diários com filtro)
-    public async Task<IActionResult> Visualizar(int? categoriaId)
-    {
-        return await Index(categoriaId);
-    }
-
-    // GET: /Diario/Detalhes/5 
-    [AllowAnonymous] // Permite acesso anônimo para visualizar detalhes
-    public async Task<IActionResult> Detalhes(int? id)
+    // GET: /Diario/Details/5 - Exibe os detalhes de um diário específico.
+    public async Task<IActionResult> Details(int? id)
     {
         try
         {
@@ -134,7 +155,7 @@ public class DiarioController : Controller
 
             var diario = await _context.Diarios
                 .Include(d => d.Categoria)
-                .Include(d => d.User) // Incluir dados do usuário para mostrar o autor
+                .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (diario == null)
@@ -142,118 +163,89 @@ public class DiarioController : Controller
                 return NotFound("Diário não encontrado");
             }
 
-            // Verificar se o usuário atual é o dono do diário
             var currentUser = await _userManager.GetUserAsync(User);
+            if (!await PodeVerDiarios(currentUser.Id, diario.UserId))
+            {
+                TempData["ErrorMessage"] = "Você só pode ver diários de amigos.";
+                return RedirectToAction("Index");
+            }
+
             ViewBag.IsCurrentUser = currentUser != null && currentUser.Id == diario.UserId;
             ViewBag.AuthorName = diario.User?.UserName ?? "Utilizador desconhecido";
-
-            _logger.LogInformation($"Detalhes do diário {id} visualizados por {currentUser?.UserName ?? "visitante anônimo"}");
+            ViewBag.CanEdit = currentUser != null && (currentUser.Id == diario.UserId || User.IsInRole("Administrador"));
 
             return View(diario);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger.LogError($"Erro ao carregar detalhes do diário {id}: {ex.Message}");
             return StatusCode(500, "Erro interno do servidor");
         }
     }
 
-    // GET: /Diario/Editar/5
-    [Authorize]
-    public async Task<IActionResult> Editar(int? id)
+    // GET: /Diario/Edit/5 - Exibe o formulário para editar um diário existente.
+    public async Task<IActionResult> Edit(int? id)
     {
-        try
+        if (id == null)
         {
-            if (id == null || _context.Diarios == null)
-            {
-                return NotFound("ID inválido");
-            }
-
-            
-            var currentUser = await _userManager.GetUserAsync(User);
-            if (currentUser == null)
-            {
-                _logger.LogWarning($"Tentativa de editar diário {id} por utilizador não autenticado");
-                return Unauthorized("Utilizador não autenticado");
-            }
-
-            
-            var diario = await _context.Diarios
-                .Include(d => d.Categoria)
-                .FirstOrDefaultAsync(d => d.Id == id);
-
-            if (diario == null)
-            {
-                _logger.LogWarning($"Tentativa de editar diário inexistente: {id}");
-                return NotFound("Diário não encontrado");
-            }
-
-            
-            if (diario.UserId != currentUser.Id)
-            {
-                _logger.LogWarning($"TENTATIVA DE VIOLAÇÃO DE SEGURANÇA: Utilizador {currentUser.Id} ({currentUser.UserName}) tentou editar diário {id} que pertence ao usuário {diario.UserId}");
-                return Forbid("Não tem permissão para editar este diário");
-            }
-
-            
-            ViewBag.Categorias = new SelectList(await _context.Categorias.ToListAsync(), "Id", "Nome", diario.CategoriaId);
-
-            _logger.LogInformation($"Formulário de edição carregado para diário {id} pelo utilizador {currentUser.Id}");
-
-            return View(diario);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Erro ao carregar formulário de edição para diário {id}: {ex.Message}");
-            return StatusCode(500, "Erro interno do servidor");
-        }
-    }
-
-    // POST: /Diario/Editar/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Editar(int id, [Bind("Id", "Titulo", "Conteudo", "CategoriaId", "UserId")] Diario diario)
-    {
-        _logger.LogInformation($"Tentativa de edição do diário com ID: {id}");
-
-        if (id != diario.Id)
-        {
-            _logger.LogWarning($"ID da rota ({id}) não corresponde ao ID do diário ({diario.Id}).");
             return NotFound();
         }
 
-        // Remover validações para propriedades de navegação
+        var diario = await _context.Diarios.FindAsync(id);
+        if (diario == null)
+        {
+            return NotFound();
+        }
+
+        var currentUser = await _userManager.GetUserAsync(User);
+
+        if (diario.UserId != currentUser.Id && !User.IsInRole("Administrador"))
+        {
+            return Forbid();
+        }
+
+        ViewBag.Categorias = new SelectList(await _context.Categorias.ToListAsync(), "Id", "Nome", diario.CategoriaId);
+
+        return View(diario);
+    }
+
+    // POST: /Diario/Edit/5 - Processa a submissão do formulário de edição de diário.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Conteudo,CategoriaId")] Diarios diario)
+    {
+        if (id != diario.Id)
+        {
+            return NotFound();
+        }
+
+        var diarioOriginal = await _context.Diarios.AsNoTracking().FirstOrDefaultAsync(d => d.Id == id);
+        if (diarioOriginal == null)
+        {
+            return NotFound();
+        }
+
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (diarioOriginal.UserId != currentUser.Id && !User.IsInRole("Administrador"))
+        {
+            return Forbid();
+        }
+
         ModelState.Remove("User");
+        ModelState.Remove("UserId");
         ModelState.Remove("Categoria");
 
         if (ModelState.IsValid)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                _logger.LogWarning("Utilizador não encontrado.");
-                return NotFound();
-            }
-
-            var diarioOriginal = await _context.Diarios.AsNoTracking().FirstOrDefaultAsync(d => d.Id == id);
-            if (diarioOriginal == null || diarioOriginal.UserId != user.Id)
-            {
-                _logger.LogWarning($"Tentativa de edição de diário ({id}) por utilizador não autorizado ({user?.Id}).");
-                return Forbid();
-            }
-
             try
             {
-                diario.UserId = user.Id;
-                diario.DataCriacao = diarioOriginal.DataCriacao; // Manter data original
+                diario.UserId = diarioOriginal.UserId;
+                diario.DataCriacao = diarioOriginal.DataCriacao;
+
                 _context.Update(diario);
                 await _context.SaveChangesAsync();
-                _logger.LogInformation($"Diário com ID: {id} editado com sucesso.");
-                return RedirectToAction(nameof(Visualizar));
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
-                _logger.LogError($"Erro de concorrência ao editar o diário {id}: {ex.Message}");
                 if (!DiarioExists(diario.Id))
                 {
                     return NotFound();
@@ -263,96 +255,73 @@ public class DiarioController : Controller
                     throw;
                 }
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Erro ao editar o diário {id}: {ex.Message}");
-                ModelState.AddModelError("", "Ocorreu um erro ao editar o diário.");
-            }
+            return RedirectToAction(nameof(Details), new { id = diario.Id });
         }
 
-        // Recarregar categorias em caso de erro
         ViewBag.Categorias = new SelectList(await _context.Categorias.ToListAsync(), "Id", "Nome", diario.CategoriaId);
-        _logger.LogWarning($"ModelState inválido ao editar o diário {id}.");
         return View(diario);
     }
 
-    // POST: /Diario/Apagar/5
+    // POST: /Diario/Delete/5 - Processa o pedido de exclusão de um diário.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    [Authorize]
-    public async Task<IActionResult> Apagar(int id)
+    public async Task<IActionResult> Delete(int id)
     {
+        var diario = await _context.Diarios.FindAsync(id);
+        if (diario == null)
+        {
+            return NotFound();
+        }
+
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (diario.UserId != currentUser.Id && !User.IsInRole("Administrador"))
+        {
+            return Forbid();
+        }
+
         try
         {
-            if (_context.Diarios == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Diarios' is null.");
-            }
-
-            
-            var currentUser = await _userManager.GetUserAsync(User);
-            if (currentUser == null)
-            {
-                _logger.LogWarning($"Tentativa de apagar diário {id} por utilizador não autenticado");
-                return Unauthorized("Utilizador não autenticado");
-            }
-
-            
-            var diario = await _context.Diarios.FindAsync(id);
-            if (diario == null)
-            {
-                _logger.LogWarning($"Tentativa de apagar diário inexistente: {id}");
-                return NotFound("Diário não encontrado");
-            }
-
-            
-            if (diario.UserId != currentUser.Id)
-            {
-                _logger.LogWarning($"TENTATIVA DE VIOLAÇÃO DE SEGURANÇA: Utilizador {currentUser.Id} ({currentUser.UserName}) tentou apagar diário {id} que pertence ao usuário {diario.UserId}");
-                return Forbid("Não tem permissão para apagar este diário");
-            }
-
-            
             _context.Diarios.Remove(diario);
             await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"Diário {id} apagado com sucesso pelo utilizador {currentUser.Id} ({currentUser.UserName})");
-
-            return RedirectToAction(nameof(Visualizar));
+            TempData["SuccessMessage"] = "Diário apagado com sucesso!";
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger.LogError($"Erro ao apagar diário {id}: {ex.Message}");
-            return StatusCode(500, "Erro interno do servidor");
+            TempData["ErrorMessage"] = "Ocorreu um erro ao tentar apagar o diário.";
         }
+
+        return RedirectToAction(nameof(Index));
     }
 
-    // GET: /Diario/UserDiaries
-    [AllowAnonymous]
+    // GET: /Diario/UserDiaries - Exibe os diários de um utilizador específico.
     public async Task<IActionResult> UserDiaries(string userId, int? categoriaId, string? query)
     {
         try
         {
-            // Verificar parâmetros
             if (string.IsNullOrEmpty(userId))
             {
                 return NotFound("UserId é obrigatório");
             }
 
-            // Verificar usuário
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser != null && !await PodeVerDiarios(currentUser.Id, userId))
+            {
+                TempData["ErrorMessage"] = "Você só pode ver diários de amigos.";
+                return RedirectToAction("Index");
+            }
+
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
             if (user == null)
             {
                 return NotFound($"Utilizador {userId} não encontrado");
             }
 
-            // Carregar categorias
             var categoriasLista = await _context.Categorias
                 .OrderBy(c => c.Nome)
                 .ToListAsync();
 
-            // Se não existem categorias, criar as padrão
-            if (categoriasLista.Count == 0)
+            if (!categoriasLista.Any())
             {
                 await SeedCategoriasIfEmpty();
                 categoriasLista = await _context.Categorias
@@ -360,7 +329,6 @@ public class DiarioController : Controller
                     .ToListAsync();
             }
 
-            // Criar SelectList para as categorias
             var selectListCategorias = new SelectList(
                 categoriasLista.Select(c => new SelectListItem
                 {
@@ -373,18 +341,15 @@ public class DiarioController : Controller
                 categoriaId?.ToString()
             );
 
-            // Carregar diários
             var queryDiarios = _context.Diarios
                 .Include(d => d.Categoria)
                 .Where(d => d.UserId == userId);
 
-            // Aplicar filtro por categoria se especificado
             if (categoriaId.HasValue && categoriaId.Value > 0)
             {
                 queryDiarios = queryDiarios.Where(d => d.CategoriaId == categoriaId.Value);
             }
 
-            // Aplicar filtro de pesquisa se especificado
             if (!string.IsNullOrEmpty(query))
             {
                 queryDiarios = queryDiarios.Where(d =>
@@ -396,148 +361,51 @@ public class DiarioController : Controller
                 .OrderByDescending(d => d.DataCriacao)
                 .ToListAsync();
 
-            // Configurar ViewBag
             ViewBag.Categorias = selectListCategorias;
-            ViewBag.CategoriasDebug = categoriasLista;
-            ViewBag.CategoriasCount = categoriasLista.Count;
             ViewBag.CategoriaSelecionada = categoriaId;
             ViewBag.CurrentSearchTerm = query;
             ViewBag.UserName = user.UserName;
             ViewBag.UserId = userId;
-
-            var currentUser = await _userManager.GetUserAsync(User);
             ViewBag.IsCurrentUser = currentUser != null && currentUser.Id == userId;
+            ViewBag.SaoAmigos = currentUser != null && await SaoAmigos(currentUser.Id, userId);
 
             return View("UserDiaries", diarios);
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Erro em UserDiaries: {ex.Message}");
             return StatusCode(500, $"Erro interno: {ex.Message}");
         }
     }
 
-    // Método auxiliar para criar categorias padrão
+    // Popula a tabela de categorias com dados padrão se estiver vazia.
     private async Task SeedCategoriasIfEmpty()
     {
         try
         {
-            var existemCategorias = await _context.Categorias.AnyAsync();
-            if (!existemCategorias)
+            if (!await _context.Categorias.AnyAsync())
             {
-                var categoriasPadrao = new List<Categoria>
+                var categoriasPadrao = new List<Categorias>
                 {
-                    new Categoria { Nome = "Pessoal", Descricao = "Pensamentos e experiências pessoais", DataCriacao = DateTime.Now },
-                    new Categoria { Nome = "Trabalho", Descricao = "Relacionado ao trabalho e carreira", DataCriacao = DateTime.Now },
-                    new Categoria { Nome = "Saúde", Descricao = "Bem-estar físico e mental", DataCriacao = DateTime.Now },
-                    new Categoria { Nome = "Viagens", Descricao = "Experiências de viagem", DataCriacao = DateTime.Now },
-                    new Categoria { Nome = "Família", Descricao = "Momentos em família", DataCriacao = DateTime.Now }
+                    new Categorias { Nome = "Pessoal", Descricao = "Pensamentos e experiências pessoais", DataCriacao = DateTime.Now },
+                    new Categorias { Nome = "Trabalho", Descricao = "Relacionado ao trabalho e carreira", DataCriacao = DateTime.Now },
+                    new Categorias { Nome = "Saúde", Descricao = "Bem-estar físico e mental", DataCriacao = DateTime.Now },
+                    new Categorias { Nome = "Viagens", Descricao = "Experiências de viagem", DataCriacao = DateTime.Now },
+                    new Categorias { Nome = "Família", Descricao = "Momentos em família", DataCriacao = DateTime.Now }
                 };
 
                 _context.Categorias.AddRange(categoriasPadrao);
                 await _context.SaveChangesAsync();
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger.LogError($"Erro no seed das categorias: {ex.Message}");
             throw;
         }
     }
 
+    // Verifica se um diário com o ID especificado existe na base de dados.
     private bool DiarioExists(int id)
     {
         return (_context.Diarios?.Any(e => e.Id == id)).GetValueOrDefault();
-    }
-
-    // GET: /Diario/VisualizarLista
-    [AllowAnonymous]
-    public async Task<IActionResult> VisualizarLista(string userId, int? categoriaId, string? query)
-    {
-        try
-        {
-            // Se não há userId, buscar o usuário atual
-            if (string.IsNullOrEmpty(userId))
-            {
-                var currentUser = await _userManager.GetUserAsync(User);
-                if (currentUser == null)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-                userId = currentUser.Id;
-            }
-
-            // Verificar se o usuário existe
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
-            if (user == null)
-            {
-                return NotFound($"Utilizador não encontrado");
-            }
-
-            // Carregar categorias
-            var categoriasLista = await _context.Categorias
-                .OrderBy(c => c.Nome)
-                .ToListAsync();
-
-            // Se não existem categorias, criar as padrão
-            if (categoriasLista.Count == 0)
-            {
-                await SeedCategoriasIfEmpty();
-                categoriasLista = await _context.Categorias
-                    .OrderBy(c => c.Nome)
-                    .ToListAsync();
-            }
-
-            // Criar SelectList para as categorias
-            var selectListCategorias = new SelectList(
-                categoriasLista,
-                "Id",
-                "Nome",
-                categoriaId
-            );
-
-            // Carregar diários
-            var queryDiarios = _context.Diarios
-                .Include(d => d.Categoria)
-                .Where(d => d.UserId == userId);
-
-            // Aplicar filtro por categoria se especificado
-            if (categoriaId.HasValue && categoriaId.Value > 0)
-            {
-                queryDiarios = queryDiarios.Where(d => d.CategoriaId == categoriaId.Value);
-            }
-
-            // Aplicar filtro de pesquisa se especificado
-            if (!string.IsNullOrEmpty(query))
-            {
-                queryDiarios = queryDiarios.Where(d =>
-                    d.Titulo.Contains(query) ||
-                    d.Conteudo.Contains(query));
-            }
-
-            var diarios = await queryDiarios
-                .OrderByDescending(d => d.DataCriacao)
-                .ToListAsync();
-
-            // Configurar ViewBag
-            ViewBag.Categorias = selectListCategorias;
-            ViewBag.CategoriasDebug = categoriasLista;
-            ViewBag.CategoriasCount = categoriasLista.Count;
-            ViewBag.CategoriaSelecionada = categoriaId;
-            ViewBag.CurrentSearchTerm = query;
-            ViewBag.UserName = user.UserName;
-            ViewBag.UserId = userId;
-
-            var currentLoggedUser = await _userManager.GetUserAsync(User);
-            ViewBag.IsCurrentUser = currentLoggedUser != null && currentLoggedUser.Id == userId;
-
-            // Usar a view UserDiaries que já funciona
-            return View("UserDiaries", diarios);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError($"Erro em VisualizarLista: {ex.Message}");
-            return StatusCode(500, $"Erro interno: {ex.Message}");
-        }
     }
 }
