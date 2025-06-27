@@ -82,7 +82,7 @@
                             </p>
                         </div>
                         <div class="card-footer bg-transparent">
-                            @if (ViewBag.IsCurrentUser == true)
+                            @if (ViewBag.IsCurrentUser == true || ViewBag.isAdmin == true)
                             {
                                 <!-- Botões para o dono dos diários (pode ver, editar e apagar) -->
                                 <div class="d-flex gap-1 flex-wrap">

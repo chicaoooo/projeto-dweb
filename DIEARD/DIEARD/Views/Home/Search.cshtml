@@ -30,7 +30,8 @@
                         <strong>@user.UserName</strong> - @user.Email
 
                         <div class="mt-2">
-                            @if ((bool?)ViewData[$"JaAmigo_{user.Id}"] == true)
+
+                            @if ((bool?)ViewData[$"JaAmigo_{user.Id}"] == true || (ViewBag.IsAdmin == true))
                             {
                                 <span class="badge bg-success">Amigos</span>
                                 <a href="/Amizade/DiariosDo?amigoId=@user.Id" class="btn btn-sm btn-primary">Ver Diários</a>

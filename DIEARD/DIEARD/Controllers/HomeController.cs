@@ -23,7 +23,7 @@ namespace DIEARD.Controllers
             _signInManager = signInManager;
         }
 
-        // GET: Exibe a página principal com um resumo das informações do utilizador.
+        // GET: Mostra a página principal com um resumo das informações do utilizador.
         public async Task<IActionResult> Index()
         {
             ViewBag.UtilizadorNome = "Visitante";
@@ -125,10 +125,15 @@ namespace DIEARD.Controllers
             }
         }
 
-        // GET: Realiza a pesquisa de utilizadores e exibe os resultados.
+        // GET: Realiza a pesquisa de utilizadores e mostra os resultados.
         [HttpGet("/search")]
         public IActionResult Search(string query)
         {
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Verificar se o ID do utilizador atual é "admin"
+            ViewBag.IsAdmin = (currentUserId == "admin");
+
             if (string.IsNullOrEmpty(query))
             {
                 return View(new List<IdentityUser>());

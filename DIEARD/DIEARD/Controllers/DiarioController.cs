@@ -38,7 +38,9 @@ public class DiarioController : Controller
     // Verifica se um utilizador tem permissão para ver os diários de outro.
     private async Task<bool> PodeVerDiarios(string viewerId, string ownerId)
     {
-        if (User.IsInRole("Administrador")) return true;
+        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (currentUserId == "admin" || User.IsInRole("Administrador"))
+            return true;
         return await SaoAmigos(viewerId, ownerId);
     }
 
@@ -361,6 +363,9 @@ public class DiarioController : Controller
                 .OrderByDescending(d => d.DataCriacao)
                 .ToListAsync();
 
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            ViewBag.isAdmin = (currentUserId == "admin");
             ViewBag.Categorias = selectListCategorias;
             ViewBag.CategoriaSelecionada = categoriaId;
             ViewBag.CurrentSearchTerm = query;

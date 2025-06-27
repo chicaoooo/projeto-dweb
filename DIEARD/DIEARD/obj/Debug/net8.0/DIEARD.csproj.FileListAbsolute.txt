@@ -290,3 +290,4 @@ C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Debug\net8.0\refint\DIEARD
 C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Debug\net8.0\DIEARD.pdb
 C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Debug\net8.0\DIEARD.genruntimeconfig.cache
 C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Debug\net8.0\ref\DIEARD.dll
+C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
