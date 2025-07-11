@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj": {}
+    "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj": {}
   },
   "projects": {
-    "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj": {
+    "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj",
+        "projectUniqueName": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj",
         "projectName": "DIEARD",
-        "projectPath": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj",
-        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\franc\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\obj\\",
+        "projectPath": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\DIEARD.csproj",
+        "packagesPath": "C:\\Users\\Francisco\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Francisco\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -50,6 +50,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.13, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.13, )"
@@ -77,6 +81,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.7, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -98,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

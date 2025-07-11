@@ -291,3 +291,17 @@ C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\refint\DIEA
 C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.pdb
 C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.genruntimeconfig.cache
 C:\Users\franc\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\ref\DIEARD.dll
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.csproj.AssemblyReference.cache
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\rpswa.dswa.cache.json
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.AssemblyInfoInputs.cache
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.AssemblyInfo.cs
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.csproj.CoreCompileInputs.cache
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.RazorAssemblyInfo.cache
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.RazorAssemblyInfo.cs
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.sourcelink.json
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.dll
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\refint\DIEARD.dll
+C:\Users\Francisco\Desktop\projeto-dweb\DIEARD\DIEARD\obj\Release\net8.0\DIEARD.pdb
