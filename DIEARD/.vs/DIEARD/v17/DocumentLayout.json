@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\francisco\\desktop\\projeto-dweb\\dieard\\dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\francisco\\desktop\\projeto-dweb\\dieard\\dieard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\francisco\\desktop\\projeto-dweb\\dieard\\dieard\\controllers\\api\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\controllers\\api\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\francisco\\desktop\\projeto-dweb\\dieard\\dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|solutionrelative:dieard\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{26EAAB4E-BCC6-4D6E-A9C5-EF5986B08E08}|DIEARD\\DIEARD.csproj|c:\\users\\francisco\\desktop\\projeto-dweb\\dieard\\dieard\\controllers\\diariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,6 +43,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\appsettings.json",
+              "RelativeDocumentMoniker": "DIEARD\\appsettings.json",
+              "ToolTip": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\appsettings.json",
+              "RelativeToolTip": "DIEARD\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-11T14:52:34.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Program.cs",
               "RelativeDocumentMoniker": "DIEARD\\Program.cs",
@@ -57,14 +74,14 @@
               "RelativeDocumentMoniker": "DIEARD\\Controllers\\api\\AuthController.cs",
               "ToolTip": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\api\\AuthController.cs",
               "RelativeToolTip": "DIEARD\\Controllers\\api\\AuthController.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAywAAAAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwDoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-11T11:25:57.405Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DiarioController.cs",
               "DocumentMoniker": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\DiarioController.cs",
               "RelativeDocumentMoniker": "DIEARD\\Controllers\\DiarioController.cs",
@@ -72,12 +89,11 @@
               "RelativeToolTip": "DIEARD\\Controllers\\DiarioController.cs",
               "ViewState": "AgIAAGEBAAAAAAAAAAAmwG8BAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T13:53:09.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-27T13:53:09.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "UserDiaries.cshtml",
               "DocumentMoniker": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\UserDiaries.cshtml",
               "RelativeDocumentMoniker": "DIEARD\\Views\\Diario\\UserDiaries.cshtml",
@@ -89,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "DIEARD\\Controllers\\HomeController.cs",
@@ -101,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Francisco\\Desktop\\projeto-dweb\\DIEARD\\DIEARD\\Views\\Diario\\Index.cshtml",
               "RelativeDocumentMoniker": "DIEARD\\Views\\Diario\\Index.cshtml",

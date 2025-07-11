@@ -33,21 +33,29 @@ namespace DIEARD.Controllers.api
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginApiModel loginRequest)
         {
-            var user = await _userManager.FindByEmailAsync(loginRequest.Email);
-            if (user == null)
-                return Unauthorized("Credenciais inválidas");
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginRequest.Password, false);
-            if (!result.Succeeded)
-                return Unauthorized("Credenciais inválidas");
-
-            var token = _tokenService.GenerateToken(user);
-
-            return Ok(new
+            try
             {
-                Token = token,
-                ExpiresIn = DateTime.Now.AddHours(1)
-            });
+                var user = await _userManager.FindByEmailAsync(loginRequest.Email);
+                if (user == null)
+                    return Unauthorized("Credenciais inválidas");
+
+                var result = await _signInManager.CheckPasswordSignInAsync(user, loginRequest.Password, false);
+                if (!result.Succeeded)
+                    return Unauthorized("Credenciais inválidas");
+
+                var token = _tokenService.GenerateToken(user);
+
+                return Ok(new
+                {
+                    Token = token,
+                    ExpiresIn = DateTime.Now.AddHours(1)
+                });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
         [HttpGet("test-auth")]
